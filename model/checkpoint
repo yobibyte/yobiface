@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/loe/dev/yobiface/models/model-20160506.ckpt-500000"
+all_model_checkpoint_paths: "/home/loe/dev/yobiface/models/model-20160506.ckpt-500000"
