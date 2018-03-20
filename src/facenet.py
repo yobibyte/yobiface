@@ -134,7 +134,7 @@ def batch_norm(x, n_out, phase_train, name, affine=True):
                         name=name+'/gamma', trainable=affine)
   
     batch_mean, batch_var = tf.nn.moments(x, [0,1,2], name='moments')
-    ema = tf.train.ExponentialMovingAverage(decay=0.9)
+    ema = tf.train.ExponentialMovingAverage(decay=0.9, zero_debias=False)
     def mean_var_with_update():
       ema_apply_op = ema.apply([batch_mean, batch_var])
       with tf.control_dependencies([ema_apply_op]):
@@ -193,7 +193,7 @@ def inception(inp, inSize, ks, o1s, o2s1, o2s2, o3s1, o3s2, o4s1, o4s2, o4s3, po
       pool_conv = pool
     net.append(pool_conv)
   
-    incept = array_ops.concat(3, net, name=name)
+    incept = array_ops.concat(net, 3, name=name)
   return incept
 
 def triplet_loss(anchor, positive, negative, alpha):
